@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+    db:
+        container_name: teldir-db
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: ${DB_TITLE}
+            POSRGRES_USER: ${DB_USER_NAME}
+            POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
+        restart: always
+        ports: 
+            - ${DB_PORT}:5432
+        volumes:
+            - db-volume:/var/lib/postgresql/data 
+        networks:
+            - teldir-web
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U ${DB_USER_NAME}"]
+            interval: 1s
+            timeout: 5s
+            retries: 10
+
+volumes:
+  db-volume:
+    driver: local
+
+networks:
+    teldir-web:
+
+    
