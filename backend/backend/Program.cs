@@ -38,6 +38,13 @@ namespace backend
 
             app.MapControllers();
 
+            app.UseCors(config =>
+            {
+                config.WithHeaders().AllowAnyHeader();
+                config.WithMethods().AllowAnyMethod();
+                config.WithOrigins("http://localhost:4002");
+            });
+
             app.Run();
         }
     }

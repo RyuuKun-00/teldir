@@ -7,7 +7,7 @@ using System.Security.Principal;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("/contact")]
+    [Route("/Contacts")]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
