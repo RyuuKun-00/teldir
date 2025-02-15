@@ -1,0 +1,12 @@
+.card__name{
+    font-size: large;
+    font-weight: bolder;
+}
+
+.load{
+    text-align: center;
+}
+
+.contact__modal > *{
+    margin: 5px;
+}
