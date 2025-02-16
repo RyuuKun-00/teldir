@@ -17,8 +17,11 @@ namespace backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                throw new InvalidOperationException("Connection string \"DefaultConnection\" not found.");
+            string nameConnection = builder.Configuration.GetSection("CustomSettings").GetValue<string>("ConnectionStringsNameDefault") ??
+                                    "LocalConnection";
+
+            var connectionString = builder.Configuration.GetConnectionString(nameConnection) ??
+                throw new InvalidOperationException($"Connection string \"{nameConnection}\" not found.");
 
             builder.Services.AddDbContext<ContactStoreDBContext>(options =>
                 options.UseNpgsql(connectionString)

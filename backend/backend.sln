@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend", "backend\backend.csproj", "{2CD7858A-EADD-4CA2-A0DA-CFBC46E1C374}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Application", "backend.Application\backend.Application.csproj", "{3A0B1723-BE38-418C-8833-F91BEA420EA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.DataAccess", "backend.DataAccess\backend.DataAccess.csproj", "{BAFE0D8D-59E8-4804-9309-384A6C950CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Migrations", "backend.Migrations\backend.Migrations.csproj", "{5D3C7FBC-8DAC-4B31-8947-4C0BA9B61BFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BAFE0D8D-59E8-4804-9309-384A6C950CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAFE0D8D-59E8-4804-9309-384A6C950CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAFE0D8D-59E8-4804-9309-384A6C950CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3C7FBC-8DAC-4B31-8947-4C0BA9B61BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3C7FBC-8DAC-4B31-8947-4C0BA9B61BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3C7FBC-8DAC-4B31-8947-4C0BA9B61BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3C7FBC-8DAC-4B31-8947-4C0BA9B61BFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
