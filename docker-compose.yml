@@ -1,8 +1,6 @@
-version: '3.9'
 
 services:
     db:
-        container_name: teldir-db
         image: postgres:latest
         environment:
             POSTGRES_DB: ${DB_TITLE}
@@ -11,21 +9,36 @@ services:
         restart: always
         ports: 
             - ${DB_PORT}:5432
+        expose:
+            - 5432
         volumes:
             - db-volume:/var/lib/postgresql/data 
         networks:
             - teldir-web
         healthcheck:
-            test: ["CMD-SHELL", "pg_isready -U ${DB_USER_NAME}"]
-            interval: 1s
-            timeout: 5s
-            retries: 10
+            test: ["CMD-SHELL", "pg_isready -U ${DB_USER_NAME} -d ${DB_TITLE}"]
+            interval: 10s
+            retries: 5
+            start_period: 30s
+            timeout: 10s
+    backend:
+        depends_on:
+             db:
+                condition: service_healthy
+                restart: true
+        build: 
+            context: ./backend
+            dockerfile: Dockerfile
+        ports: 
+            - ${BACKEND_PORT}:4001
+        restart: always
+        networks:
+            - teldir-web
 
 volumes:
-  db-volume:
-    driver: local
+    db-volume:
+        driver: local
 
 networks:
     teldir-web:
-
-    
+        driver: bridge

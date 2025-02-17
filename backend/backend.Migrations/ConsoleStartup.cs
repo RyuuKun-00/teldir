@@ -1,7 +1,10 @@
 ﻿using System;
 using backend.DataAccess;
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+=======
+>>>>>>> backend
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +20,10 @@ namespace backend.Migrations
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-
             var connectionString = Configuration.GetConnectionString("DefaultConnection") ??
                  throw new InvalidOperationException($"Connection string \"DefaultConnection\" not found.");
             Console.WriteLine("String connection:"+ connectionString);
+
         }
 
         public IConfiguration Configuration { get; }
@@ -31,12 +34,13 @@ namespace backend.Migrations
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
 
+
             });
         }
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }
+
     }
 }
