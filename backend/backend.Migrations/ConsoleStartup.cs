@@ -1,10 +1,7 @@
 ﻿using System;
 using backend.DataAccess;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-=======
->>>>>>> backend
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

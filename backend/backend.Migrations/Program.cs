@@ -8,11 +8,7 @@ namespace backend.Migrations
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            Console.WriteLine("Applying migrations"+ Directory.GetCurrentDirectory());
-=======
             Console.WriteLine("Applying migrations");
->>>>>>> backend
             var webHost = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<ConsoleStartup>()
