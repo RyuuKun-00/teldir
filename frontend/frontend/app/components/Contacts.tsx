@@ -3,7 +3,6 @@ import Card from "antd/es/card/Card"
 import { ContactTitle } from "./ContactTitle";
 import { Button } from "antd";
 import {FormOutlined , DeleteOutlined} from '@ant-design/icons';
-import { Variants } from "antd/es/config-provider";
 
 interface Props{
     contacts: Contact[];

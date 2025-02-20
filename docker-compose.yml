@@ -15,6 +15,7 @@ services:
             - db-volume:/var/lib/postgresql/data 
         networks:
             - teldir-web
+        command: ["postgres", "-c", "log_statement=all"]
         healthcheck:
             test: ["CMD-SHELL", "pg_isready -U ${DB_USER_NAME} -d ${DB_TITLE}"]
             interval: 10s
@@ -34,6 +35,19 @@ services:
         restart: always
         networks:
             - teldir-web
+    frontend:
+        depends_on:
+            - backend
+        build: 
+            context: ./frontend/frontend
+            dockerfile: Dockerfile
+        ports: 
+            - ${FRONTEND_PORT}:4002
+        restart: always
+        networks:
+            - teldir-web
+
+
 
 volumes:
     db-volume:

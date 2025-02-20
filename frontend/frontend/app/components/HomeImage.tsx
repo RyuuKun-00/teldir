@@ -5,7 +5,7 @@ interface Props{
     src:string;
     alt:string;
 }
-
+/* eslint-disable */
 export const HomeImage = ({src,alt}:Props)=>{
     return(
         <div className="technology">

@@ -5,12 +5,12 @@ export interface ContactRequest{
 }
 
 export const getAllContact = async ()=>{
-    let response = await fetch("http://localhost:4001/Contacts");
+    const response = await fetch("http://backend:4001/Contacts");
     return response.json();
 }
 
 export const createContact = async (contactRequest: ContactRequest) =>{
-    let id = await fetch("http://localhost:4001/Contacts",{
+    const id = await fetch("http://backend:4001/Contacts",{
         method:"POST",
         headers:{
             "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const createContact = async (contactRequest: ContactRequest) =>{
 }
 
 export const updateContact = async (id: string,contactRequest: ContactRequest)=>{
-    let _id = await fetch(`http://localhost:4001/Contacts/${id}`,{
+    const _id = await fetch(`http://backend:4001/Contacts/${id}`,{
         method: "PUT",
         headers:{
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const updateContact = async (id: string,contactRequest: ContactRequest)=>
 }
 
 export const deleteContact = async (id: string) =>{
-    let _id = await fetch(`http://localhost:4001/Contacts/${id}`,{
+    const _id = await fetch(`http://backend:4001/Contacts/${id}`,{
         method: "DELETE"
     });
 

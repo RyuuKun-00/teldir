@@ -3,7 +3,7 @@ import { ContactRequest } from "../services/ConatctService";
 import { useEffect, useState } from "react";
 import Input from "antd/es/input/Input";
 import TextArea from "antd/es/input/TextArea";
-
+/* eslint-disable */
 interface Props{
     mode: Mode;
     values: Contact;
@@ -39,7 +39,7 @@ export const CreateUpdateConstact = ({
     const handleOnOk = async ()=>{
         const contactRequest  = {name,number,description};
 
-        mode == Mode.Create ? handleCreate(contactRequest) : handleUpdate(values.id,contactRequest);
+        (mode == Mode.Create ? handleCreate(contactRequest) : handleUpdate(values.id,contactRequest));
     }
 
     return (

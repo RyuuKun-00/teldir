@@ -42,7 +42,7 @@ namespace backend
             {
                 config.WithHeaders().AllowAnyHeader();
                 config.WithMethods().AllowAnyMethod();
-                config.WithOrigins("http://localhost:4002");
+                //config.WithOrigins("http://localhost:4002");
             });
 
             app.Run();
