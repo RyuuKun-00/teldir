@@ -34,7 +34,7 @@ export default function Home() {
             />
           <HomeImage 
             src="/images/sql.png" 
-            alt="Microsoft SQL Server" 
+            alt="PostgreSQL" 
             />
         </div>
 
