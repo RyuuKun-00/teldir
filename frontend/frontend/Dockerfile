@@ -18,5 +18,5 @@ COPY --from=builder /frontend/package.json ./package.json
 COPY --from=builder /frontend/.next ./.next
 COPY --from=builder /frontend/node_modules ./node_modules
 
-EXPOSE 4002
+EXPOSE ${FRONTEND_PORT}
 CMD ["npm","run", "start"]
