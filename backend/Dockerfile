@@ -34,5 +34,5 @@ COPY --from=migration /app/migration .
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-EXPOSE 4001
+EXPOSE ${BACKEND_EXPOSE_PORT}
 ENTRYPOINT ["dotnet", "backend.dll"]
