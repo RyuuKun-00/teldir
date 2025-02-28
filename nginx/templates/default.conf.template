@@ -1,4 +1,11 @@
-server {
+user root;
+
+worker_processes  1;
+events{
+    
+}
+http{
+    server {
     listen       ${NGINX_PORT};
     
     server_name  MySite;
@@ -10,4 +17,5 @@ server {
     location /Contacts {
         proxy_pass http://backend:${BACKEND_PORT}/Contacts/;
     }
+}
 }

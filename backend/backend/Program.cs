@@ -17,10 +17,11 @@ namespace backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            
+            var portFrontend = GetEnvironment("FRONTEND_PORT");
 
-            var withOrigins = builder.Configuration.GetSection("WithOrigins").Get<string[]>() ??
-                throw new InvalidOperationException($"Configuration \"WithOrigins\" not found.");
+            var portNginx = GetEnvironment("NGINX_PORT");
+
+            string[] withOrigins = [$"http://localhost:{portFrontend}",$"http://localhost:{portNginx}"];
 
             int port = Convert.ToInt32(GetEnvironment("BACKEND_PORT"));
 

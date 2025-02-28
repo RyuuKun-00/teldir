@@ -48,7 +48,9 @@ services:
         depends_on:
             - backend
     nginx:
-        image: nginx
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile
         env_file:
             - .env
         ports:
@@ -58,8 +60,6 @@ services:
             - frontend
         networks:
             - teldir-web
-        volumes:
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
 
 volumes:
