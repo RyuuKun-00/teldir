@@ -4,7 +4,7 @@ export interface ContactRequest{
     description: string;
 }
 
-const url = `http://localhost:4001`;
+const url = `http://localhost:4001/api`;
 
 export const getAllContact = async ()=>{
     const response = await fetch(`${url}/Contacts`);

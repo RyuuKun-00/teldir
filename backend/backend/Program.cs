@@ -1,13 +1,5 @@
-
-
-using backend.Application.Services;
-using backend.DataAccess;
-using backend.DataAccess.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using System.Net;
+using backend.Configurations;
 using System.Collections;
-using System.Reflection.Metadata.Ecma335;
 
 namespace backend
 {
@@ -17,35 +9,11 @@ namespace backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var portFrontend = GetEnvironment("FRONTEND_PORT");
+            builder.ConfigureKestrel();
 
-            var portNginx = GetEnvironment("NGINX_PORT");
-
-            string[] withOrigins = [$"http://localhost:{portFrontend}",$"http://localhost:{portNginx}"];
-
-            int port = Convert.ToInt32(GetEnvironment("BACKEND_PORT"));
-
-            builder.WebHost.ConfigureKestrel(o =>
-            {
-                o.Listen(IPAddress.Parse("0.0.0.0"), port);
-            });
-
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                throw new InvalidOperationException($"Connection string \"DefaultConnection\" not found.");
-
-            builder.Services.AddDbContext<ContactStoreDBContext>(options =>
-                options.UseNpgsql(connectionString)
-            );
-
-            builder.Services.AddScoped<IContactRepository, ContactRepository>();
-            builder.Services.AddScoped<IContactService, ContactService>();
+            builder.AddServices();
 
             var app = builder.Build();
-
 
 
             if (app.Environment.IsDevelopment())
@@ -54,26 +22,14 @@ namespace backend
                 app.UseSwagger();
             }
 
+            app.UseCors("CustomCors");
 
-
-            app.UseCors(config =>
-            {
-                config.WithHeaders().AllowAnyHeader();
-                config.WithMethods().AllowAnyMethod();
-                config.WithOrigins(withOrigins);
-            });
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
             app.Run();
-        }
-
-        public static string GetEnvironment(string name)
-        {
-            string env = Environment.GetEnvironmentVariable(name) ??
-                throw new InvalidOperationException($"Environment variable \"{name}\" not found.");
-
-            return env;
         }
     }
 }

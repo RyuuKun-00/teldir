@@ -8,5 +8,6 @@ namespace backend.DataAccess
         public ContactStoreDBContext(DbContextOptions<ContactStoreDBContext> options) : base(options) { }
 
         public DbSet<ContactEntity> Contacts { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
     }
 }

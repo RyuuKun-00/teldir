@@ -17,8 +17,8 @@ namespace backend.Migrations
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            var connectionString = Configuration.GetConnectionString("DefaultConnection") ??
-                 throw new InvalidOperationException($"Connection string \"DefaultConnection\" not found.");
+            var connectionString = Configuration.GetConnectionString("Test") ??
+                 throw new InvalidOperationException($"Connection string \"Test\" not found.");
             Console.WriteLine("String connection:"+ connectionString);
 
         }
@@ -29,7 +29,7 @@ namespace backend.Migrations
         {
             services.AddDbContext<ContactStoreDBContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("Test"));
 
 
             });

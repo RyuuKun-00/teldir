@@ -14,23 +14,5 @@
             Number = number;
             Description = description;
         }
-
-        public static (Contact Contact,string Error) Create( string name, string number, string description)
-        {
-            var error = string.Empty;
-
-            if (string.IsNullOrEmpty(name))
-            {
-                error = "Contact name cannot be empty.";
-            }
-            if (string.IsNullOrEmpty(number))
-            {
-                error = $"Contact{(string.IsNullOrEmpty(name)? "name and":"")} number cannot be empty.";
-            }
-
-            var contact = new Contact(new Guid(), name, number, description);
-
-            return (contact, error);
-        }
     }
 }

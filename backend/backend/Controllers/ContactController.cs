@@ -2,12 +2,11 @@
 using backend.Contracts;
 using backend.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Principal;
 
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("/contacts")]
+    [Route("/api/contacts")]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
@@ -30,12 +29,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> ContactCreate([FromBody] ContactRequest request)
         {
-            var (contact, error) = Contact.Create(request.Name, request.Number, request.Description);
-
-            if (!string.IsNullOrEmpty(error))
-            {
-                return BadRequest(error);
-            }
+            var contact = new Contact(new Guid(),request.Name, request.Number, request.Description!);
 
             var contactId = await _contactService.ContactCreate(contact);
 
@@ -45,7 +39,7 @@ namespace backend.Controllers
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<Guid>> ContactUpdate(Guid id, [FromBody] ContactRequest request)
         {
-            var contactId = await _contactService.ContactUpdate(id, request.Name, request.Number, request.Description);
+            var contactId = await _contactService.ContactUpdate(id, request.Name, request.Number, request.Description!);
 
             return Ok(contactId);
         }
