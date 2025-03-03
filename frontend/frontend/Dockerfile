@@ -7,6 +7,8 @@ FROM node:latest as builder
 WORKDIR /frontend
 COPY . .
 COPY --from=dependencies /frontend/node_modules ./node_modules
+ARG NEXT_PUBLIC_BACKEND_PORT
+ENV NEXT_PUBLIC_BACKEND_PORT ${NEXT_PUBLIC_BACKEND_PORT}
 RUN npm run build
 
 FROM node:latest as runner

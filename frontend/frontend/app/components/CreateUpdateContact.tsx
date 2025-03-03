@@ -11,6 +11,7 @@ interface Props{
     handleCancel: () => void;
     handleCreate: (contactRequest: ContactRequest) => void;
     handleUpdate: (id: string, contactRequest:ContactRequest) => void;
+    setError: (id:string,isError:boolean)=>void;
 }
 
 export enum Mode{
@@ -24,7 +25,8 @@ export const CreateUpdateConstact = ({
     isModelopen,
     handleCancel,
     handleCreate,
-    handleUpdate
+    handleUpdate,
+    setError
 }:Props)=>{
     const [name,setName] = useState<string>("");
     const [number,setNumber] = useState<string>("");
@@ -37,6 +39,16 @@ export const CreateUpdateConstact = ({
     },[values]);
 
     const handleOnOk = async ()=>{
+        var isValid = true;
+        if(name == ""){
+            setError("name",true);
+            isValid = false;
+        }else setError("name",false);
+        if(number == ""){
+            setError("number",true);
+            isValid = false;
+        }else setError("number",false);
+        if(!isValid) return;
         const contactRequest  = {name,number,description};
 
         (mode == Mode.Create ? handleCreate(contactRequest) : handleUpdate(values.id,contactRequest));
@@ -47,20 +59,24 @@ export const CreateUpdateConstact = ({
             open={isModelopen}
             cancelText = "Отмена"
             onOk={handleOnOk}
-            onCancel={handleCancel}
+            onCancel={()=>{handleCancel();}}
         >
             <div className="contact__modal">
+                
                 <Input
                     classNames={{}}
                     value={name}
                     onChange={(e)=>setName(e.target.value)}
                     placeholder="Имя"
                 />
+                <p className="set_error" id="name">Поле "Имя" не может быть пустым.</p>
+                
                 <Input 
                     value={number}
                     onChange={(e)=>setNumber(e.target.value)}
                     placeholder="Номер"
                 />
+                <p className="set_error" id="number">Поле "Номер" не может быть пустым.</p>
                 <TextArea
                     value={description}
                     onChange={(e)=>setDescription(e.target.value)}

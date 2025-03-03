@@ -10,3 +10,7 @@
 .contact__modal > *{
     margin: 5px;
 }
+.set_error{
+    color: rgb(255, 0, 0);
+    display: none;
+}

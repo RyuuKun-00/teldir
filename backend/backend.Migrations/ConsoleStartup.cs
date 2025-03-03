@@ -3,6 +3,7 @@ using backend.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,14 +12,15 @@ namespace backend.Migrations
 {
     public class ConsoleStartup
     {
+        const string nameConnection = "DefaultConnection";
         public ConsoleStartup()
         {
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            var connectionString = Configuration.GetConnectionString("Test") ??
-                 throw new InvalidOperationException($"Connection string \"Test\" not found.");
+            var connectionString = Configuration.GetConnectionString(nameConnection) ??
+                 throw new InvalidOperationException($"Connection string \"{nameConnection}\" not found.");
             Console.WriteLine("String connection:"+ connectionString);
 
         }
@@ -29,7 +31,7 @@ namespace backend.Migrations
         {
             services.AddDbContext<ContactStoreDBContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("Test"));
+                options.UseNpgsql(Configuration.GetConnectionString(nameConnection));
 
 
             });

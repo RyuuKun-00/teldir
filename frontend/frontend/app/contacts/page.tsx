@@ -60,6 +60,15 @@ export default function ContactsPage() {
         setContacts(contact);
     }
 
+    const setError = (id:string,isError:boolean)=>{
+        const element = document.getElementById(id);
+        if(element){
+            element.style.display= isError?"inline":"none";
+        }else{
+            console.log(`Element \"${id}\" not found.`);
+        }
+    };
+
     const openEditModal = (contact: Contact) => {
         setMode(Mode.Edit);
         setValues(contact);
@@ -74,6 +83,8 @@ export default function ContactsPage() {
     const closeModal = () => {
         setValues(defaultValues);
         setIsModalOpen(false);
+        setError("name",false);
+        setError("number",false);
     }
 
     return (
@@ -89,7 +100,7 @@ export default function ContactsPage() {
                 handleCreate={handleCreateContact} 
                 handleUpdate={handleUpdateContact}
                 handleCancel={closeModal}
-                
+                setError={setError}
             />
 
                 {loading 
