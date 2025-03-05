@@ -1,4 +1,5 @@
 ﻿using backend.DataAccess;
+using backend.DataAccess.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace backend.Migrations
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Applying migrations");
+            Console.WriteLine("Created database");
             var webHost = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<ConsoleStartup>()
@@ -17,7 +18,10 @@ namespace backend.Migrations
             using (var context = (ContactStoreDBContext?)webHost.Services.GetService(typeof(ContactStoreDBContext)))
             {
                 if(context == null) throw new InvalidOperationException($"Context is null.");
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
+
+                context.Init();
+                
             }
             Console.WriteLine("Done");
         }

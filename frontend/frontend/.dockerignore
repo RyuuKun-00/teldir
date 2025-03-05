@@ -25,3 +25,4 @@
 **/.next
 LICENSE
 README.md
+**/.env.local

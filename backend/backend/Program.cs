@@ -13,8 +13,9 @@ namespace backend
 
             builder.AddServices();
 
-            var app = builder.Build();
+            
 
+            var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
             {
@@ -23,9 +24,6 @@ namespace backend
             }
 
             app.UseCors("CustomCors");
-
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.MapControllers();
 

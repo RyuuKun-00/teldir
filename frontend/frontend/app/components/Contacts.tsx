@@ -1,5 +1,8 @@
 
 import Card from "antd/es/card/Card"
+import Collapse from "antd/es/collapse/Collapse"
+import ConfigProvider from "antd/es/config-provider/index"
+import { CaretRightOutlined } from '@ant-design/icons';
 import { ContactTitle } from "./ContactTitle";
 import { Button } from "antd";
 import {FormOutlined , DeleteOutlined} from '@ant-design/icons';
@@ -16,34 +19,63 @@ export const Contacts = ({contacts,handleDelete,handleUpdate}:Props) =>{
         <div className="cards" >
             {contacts.map((contact)=>{
                 return (
-                    <Card 
+                    <ConfigProvider
                         key={contact.id} 
-                        title = {<ContactTitle name={contact.name} number={contact.number}/>}
-                        variant={"outlined"}
-                        style={{marginBottom: "15px"}}
-                        actions={[
-                            
-                        ]}
+                        theme={{
+                            components: {
+                            Card: {
+                                bodyPadding:0
+                            },
+                            },
+                        }}
                     >
-                        <p className="card__description">{contact.description}</p>
-                        <div className="card__buttons">
-                            <Button onClick={()=>handleUpdate(contact)}
-                                style={{flex:1, padding: "0px 30px 0px 10px"}}
-                                icon ={<FormOutlined style={{ fontSize: 20}}/>}
-                                type="link"
-                                size="large"
-                                >
-                            </Button>
-                            <Button onClick={()=>handleDelete(contact.id)}
-                                danger
-                                style={{flex:1,padding: "0px 30px 0px 30px"}}
-                                icon ={<DeleteOutlined style={{fontSize: 20}}/>}
-                                type="link"
-                                size="large"
-                                >
-                            </Button>
-                        </div>
-                    </Card>
+                        <Card 
+                            key={contact.id} 
+                            title = {<ContactTitle name={contact.name} number={contact.number}/>}
+                            variant={"outlined"}
+                            style={{
+                                marginBottom: "15px"
+                            }}
+                            actions={[
+                                
+                            ]}
+                        >
+                            <p className="card__description">
+                                    <Collapse 
+                                        style={{
+                                            margin:"0px",
+                                            padding:"0px"
+                                        }}
+                                        bordered = {true}
+                                        ghost
+                                        size="large"
+                                        items={
+                                            [{ 
+                                                label: 'Описание', 
+                                                children: <p>{contact.description}</p> }]
+                                            }
+                                        expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                    />
+                            </p>
+                            <div className="card__buttons">
+                                <Button onClick={()=>handleUpdate(contact)}
+                                    style={{flex:1, padding: "0px 30px 10px 35px"}}
+                                    icon ={<FormOutlined style={{ fontSize: 20}}/>}
+                                    type="link"
+                                    size="large"
+                                    >
+                                </Button>
+                                <Button onClick={()=>handleDelete(contact.id)}
+                                    danger
+                                    style={{flex:1,padding: "0px 30px 10px 30px"}}
+                                    icon ={<DeleteOutlined style={{fontSize: 20}}/>}
+                                    type="link"
+                                    size="large"
+                                    >
+                                </Button>
+                            </div>
+                        </Card>
+                    </ConfigProvider>
                 )
             })} 
         </div>

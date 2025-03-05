@@ -21,10 +21,6 @@ namespace backend.Configurations
 
             s.AddScoped<IContactRepository, ContactRepository>();
             s.AddScoped<IContactService, ContactService>();
-            s.AddSingleton<IAuthOptions>(AuthOptions.getInstance());
-            s.AddScoped<IJwtService,JwtService>();
-
-            s.AddCustomAuthentication();
 
             s.AddAuthorization();
         }

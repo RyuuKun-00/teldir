@@ -10,6 +10,10 @@
 .contact__modal > *{
     margin: 5px;
 }
+.card__description{
+    margin: 0;
+    padding: 0;
+}
 .set_error{
     color: rgb(255, 0, 0);
     display: none;
