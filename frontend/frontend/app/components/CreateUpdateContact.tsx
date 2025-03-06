@@ -31,6 +31,7 @@ export const CreateUpdateConstact = ({
     const [name,setName] = useState<string>("");
     const [number,setNumber] = useState<string>("");
     const [description,setDescription] = useState<string>("");
+    const [processing,setProcessing] = useState<Boolean>(false);
 
     useEffect(()=>{
         setName(values.name);
@@ -48,18 +49,27 @@ export const CreateUpdateConstact = ({
             setError("number",true);
             isValid = false;
         }else setError("number",false);
-        if(!isValid) return;
+        if(!isValid){
+            setProcessing(false);
+            return;
+        } 
         const contactRequest  = {name,number,description};
-
         (mode == Mode.Create ? handleCreate(contactRequest) : handleUpdate(values.id,contactRequest));
+        setProcessing(false);
     }
 
     return (
         <Modal title={mode === Mode.Create ? "Добавить контакт" : "Изменить контакт"} 
             open={isModelopen}
             cancelText = "Отмена"
-            onOk={handleOnOk}
+            onOk={()=>{
+                if(processing) return;
+                setProcessing(true);
+                handleOnOk();
+            }}
             onCancel={()=>{handleCancel();}}
+            closable={false}
+            maskClosable={false}
         >
             <div className="contact__modal">
                 

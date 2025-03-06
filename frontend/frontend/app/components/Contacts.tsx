@@ -41,23 +41,21 @@ export const Contacts = ({contacts,handleDelete,handleUpdate}:Props) =>{
                             ]}
                         >
                             {contact.description!=""&&
-                                <p className="card__description">
-                                        <Collapse 
-                                            style={{
-                                                margin:"0px",
-                                                padding:"0px"
-                                            }}
-                                            bordered = {true}
-                                            ghost
-                                            size="large"
-                                            items={
-                                                [{ 
-                                                    label: 'Описание', 
-                                                    children: <p>{contact.description}</p> }]
-                                                }
-                                            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-                                        />
-                                </p>
+                                <Collapse 
+                                    style={{
+                                        margin:"0px",
+                                        padding:"0px"
+                                    }}
+                                    bordered = {true}
+                                    ghost
+                                    size="large"
+                                    items={
+                                        [{ 
+                                            label: 'Описание', 
+                                            children: <p>{contact.description}</p> }]
+                                        }
+                                    expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                />
                             }
                             <div className="card__buttons">
                                 <Button onClick={()=>handleUpdate(contact)}

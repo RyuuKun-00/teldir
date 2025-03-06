@@ -11,6 +11,11 @@ export const getAllContact = async ()=>{
     return response.json();
 }
 
+export const getSearchContact = async (searchString:string)=>{
+    const response = await fetch(`${url}/Contacts/search?search=${searchString}`);
+    return response.json();
+}
+
 export const createContact = async (contactRequest: ContactRequest) =>{
     const id = await fetch(`${url}/Contacts`,{
         method:"POST",

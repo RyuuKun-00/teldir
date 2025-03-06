@@ -1,12 +1,12 @@
 "use client";
 
-
+import '@ant-design/v5-patch-for-react-19';
 import "./pageContacts.css"
-import  Button from "antd/es/button/button";
+import Button from "antd/es/button/button";
+import Search from "antd/es/input/Search";
 import { Contacts } from "../components/Contacts";
 import { useEffect, useState } from "react";
-import { ContactRequest, createContact, deleteContact, getAllContact, updateContact } from "../services/ConatctService";
-
+import { ContactRequest, createContact, deleteContact, getAllContact, getSearchContact, updateContact } from "../services/ConatctService";
 import { CreateUpdateConstact, Mode } from "../components/CreateUpdateContact";
 import { Divider, Spin } from "antd";
 
@@ -87,9 +87,27 @@ export default function ContactsPage() {
         setError("number",false);
     }
 
+    const searchContacts = async (str:string)=>{
+        setLoading(true);
+        let contact;
+        if(str==""){
+            contact = await getAllContact();
+        }else{
+            contact=await getSearchContact(str);
+        }
+        setContacts(contact);
+        setLoading(false);
+    }
     return (
         <div style={{margin: "15px",flexGrow:1}}>
-            <Button onClick={openModal}>Добавить контакт</Button>
+            <Button onClick={openModal}>Добавить контакт
+
+            </Button>
+            <Search placeholder="Текст для поиска" 
+                onSearch={(str)=>searchContacts(str)} 
+                style={{ width: 200, marginLeft: 15}} 
+                allowClear={true}
+            />
 
             <Divider style={{borderColor: "silver",margin:"15px 0px"}}></Divider>
 
@@ -107,7 +125,9 @@ export default function ContactsPage() {
                 ?   <div className="load">
                         <Spin tip="Загрузка..."><div style={{padding:"30px"}}></div></Spin> 
                     </div>
-                : <Contacts contacts={contacts} handleUpdate={openEditModal} handleDelete={handleDeleteContact}/>}
+                :
+                    <Contacts contacts={contacts} handleUpdate={openEditModal} handleDelete={handleDeleteContact}/>
+                }
             
         </div>
     );

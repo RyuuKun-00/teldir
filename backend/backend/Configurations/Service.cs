@@ -13,7 +13,10 @@ namespace backend.Configurations
 
             s.AddControllers();
             s.AddEndpointsApiExplorer();
-            s.AddSwaggerGen();
+            s.AddSwaggerGen(c =>
+            {
+		        c.CustomSchemaIds(r => r.FullName);
+            });
 
             s.AddCustomCors();
 
@@ -22,7 +25,9 @@ namespace backend.Configurations
             s.AddScoped<IContactRepository, ContactRepository>();
             s.AddScoped<IContactService, ContactService>();
 
+            s.AddAuthentication();
             s.AddAuthorization();
+           
         }
     }
 }

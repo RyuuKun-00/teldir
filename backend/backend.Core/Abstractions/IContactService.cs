@@ -7,6 +7,7 @@ namespace backend.Application.Services
         Task<Guid> ContactCreate(Contact contact);
         Task<Guid> ContactDelete(Guid id);
         Task<List<Contact>> ContactGetAll();
+        Task<List<Contact>> ContactSearch(string? searchString);
         Task<Guid> ContactUpdate(Guid id, string name, string number, string description);
     }
 }

@@ -19,6 +19,16 @@ namespace backend.Application.Services
             return await _contactRepository.Get();
         }
 
+        public async Task<List<Contact>> ContactSearch(string? searchString)
+        {
+            if (String.IsNullOrEmpty(searchString))
+            {
+                return await _contactRepository.Get();
+            }else{
+                return await _contactRepository.Search(searchString);
+            }
+        }
+
         public async Task<Guid> ContactCreate(Contact contact)
         {
             return await _contactRepository.Create(contact);

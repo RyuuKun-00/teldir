@@ -26,6 +26,18 @@ namespace backend.Controllers
             return Ok(responce);
         }
 
+        [Route("search")]
+        [HttpGet]
+        public async Task<ActionResult<List<ContactResponse>>> ContactSearch(string? search)
+        {
+            
+            var contacts = await _contactService.ContactSearch(search);
+
+            var responce = contacts.Select(x => new ContactResponse(x.Id, x.Name, x.Number, x.Description));
+
+            return Ok(responce);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Guid>> ContactCreate([FromBody] ContactRequest request)
         {

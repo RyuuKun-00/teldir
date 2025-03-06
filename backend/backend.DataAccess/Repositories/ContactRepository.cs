@@ -24,6 +24,19 @@ namespace backend.DataAccess.Repositories
             return contacts;
         }
 
+        public async Task<List<Contact>> Search(string searchString)
+        {
+            string str = searchString.ToLower();
+            var contactsEntity = await _context.Contacts
+                .Where(p=>EF.Functions.Like(p.Name.ToLower(),$"%{str}%")|| EF.Functions.Like(p.Number.ToLower(), $"%{str}%"))
+                .OrderBy(c => c.Name)
+                .ToListAsync();
+
+            var contacts = contactsEntity.Select(x => new Contact(x.Id, x.Name, x.Number, x.Description)).ToList();
+
+            return contacts;
+        }
+
         public async Task<Guid> Create(Contact contact)
         {
             var contactEntity = new ContactEntity()
