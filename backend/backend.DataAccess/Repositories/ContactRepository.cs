@@ -16,7 +16,7 @@ namespace backend.DataAccess.Repositories
         public async Task<List<Contact>> Get()
         {
             var contactsEntity = await _context.Contacts
-                .AsNoTracking()
+                .OrderBy(c=>c.Name)
                 .ToListAsync();
 
             var contacts = contactsEntity.Select(x => new Contact(x.Id, x.Name, x.Number, x.Description)).ToList();

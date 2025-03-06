@@ -40,26 +40,28 @@ export const Contacts = ({contacts,handleDelete,handleUpdate}:Props) =>{
                                 
                             ]}
                         >
-                            <p className="card__description">
-                                    <Collapse 
-                                        style={{
-                                            margin:"0px",
-                                            padding:"0px"
-                                        }}
-                                        bordered = {true}
-                                        ghost
-                                        size="large"
-                                        items={
-                                            [{ 
-                                                label: 'Описание', 
-                                                children: <p>{contact.description}</p> }]
-                                            }
-                                        expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-                                    />
-                            </p>
+                            {contact.description!=""&&
+                                <p className="card__description">
+                                        <Collapse 
+                                            style={{
+                                                margin:"0px",
+                                                padding:"0px"
+                                            }}
+                                            bordered = {true}
+                                            ghost
+                                            size="large"
+                                            items={
+                                                [{ 
+                                                    label: 'Описание', 
+                                                    children: <p>{contact.description}</p> }]
+                                                }
+                                            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                        />
+                                </p>
+                            }
                             <div className="card__buttons">
                                 <Button onClick={()=>handleUpdate(contact)}
-                                    style={{flex:1, padding: "0px 30px 10px 35px"}}
+                                    style={{flex:1, padding: "10px 30px 10px 35px"}}
                                     icon ={<FormOutlined style={{ fontSize: 20}}/>}
                                     type="link"
                                     size="large"
@@ -67,7 +69,7 @@ export const Contacts = ({contacts,handleDelete,handleUpdate}:Props) =>{
                                 </Button>
                                 <Button onClick={()=>handleDelete(contact.id)}
                                     danger
-                                    style={{flex:1,padding: "0px 30px 10px 30px"}}
+                                    style={{flex:1,padding: "10px 30px 10px 30px"}}
                                     icon ={<DeleteOutlined style={{fontSize: 20}}/>}
                                     type="link"
                                     size="large"
