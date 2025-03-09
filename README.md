@@ -6,4 +6,4 @@ Pet-проект.
 	- git clone https://github.com/RyuuKun-00/teldir.git
 2. После загрузки в папке ./teldir запустить исполняемый файл DockerDeploy.bat для поднятия проекта(Docker должен быть запущен).
 3. После поднятия контейнеров откроется ссылка в браузере с проектом по адресу: http://localhost:4003
-   ![вид сайта](https://github.com/RyuuKun-00/teldir/preview/preview.PNG)
+   ![вид сайта](./preview/preview.PNG)
