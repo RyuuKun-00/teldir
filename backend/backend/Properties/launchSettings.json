@@ -12,10 +12,7 @@
           "ASPNETCORE_ENVIRONMENT": "Development",
           "BACKEND_PORT": "4001",
           "FRONTEND_PORT": "4002",
-          "NGINX_PORT": "4003",
-          "AUTH_OPTIONS_ISSUER": "Server_1",
-          "AUTH_OPTIONS_AUDIENCE": "Client_1",
-          "AUTH_OPTIONS_SECRET_KEY": "MySecretKey_1_MyAuthServer_2_MyAuthClient_3_!1999_1"
+          "NGINX_PORT": "4003"
         }
 
       },
