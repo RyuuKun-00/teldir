@@ -3,3 +3,11 @@
     padding: 0;
     margin: 0;
 }
+
+.account_title{
+    display: flex;
+}
+.account_title>button{
+   height: auto;
+   padding: 5px;
+}

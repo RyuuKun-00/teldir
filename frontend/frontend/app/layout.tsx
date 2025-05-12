@@ -1,10 +1,13 @@
+
 import '@ant-design/v5-patch-for-react-19';
 import type { Metadata } from "next";
 import "./globals.css";
 
 import Layout, { Content, Footer, Header } from "antd/es/layout/layout";
+import { Account } from './components/Account';
 import { Menu } from "antd";
 import Link from "next/link";
+import ReactReduxProvider from "./components/ReactReduxProvider"
 
 export const metadata: Metadata = {
   title: "Telephone Directory",
@@ -25,16 +28,19 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Layout style={{minHeight: "100vh"}}>
-          <Header>
-            <Menu 
-              theme="dark"
-              mode="horizontal"
-              items={items}
-              style={{flex: 1, minWidth: 0}}
+          <ReactReduxProvider>
+            <Header style={{ display: 'flex', alignItems: 'center'}}>
+              <Menu 
+                theme="dark"
+                mode="horizontal"
+                items={items}
+                style={{flex: 1, minWidth: 0}}
               />
-          </Header>
-        <Content style={{padding: "0 48px",display:"flex"}}>{children}</Content>
-        <Footer style={{textAlign:"center"}}>{(new Date()).getFullYear()} RyuuKun</Footer>
+            <Account/>
+            </Header>
+            <Content style={{padding: "0 5vw",display:"flex"}}>{children}</Content>
+            <Footer style={{textAlign:"center"}}>{(new Date()).getFullYear()} RyuuKun</Footer>
+          </ReactReduxProvider>
         </Layout>
       </body>
     </html>

@@ -3,6 +3,7 @@ import { ContactRequest } from "../services/ConatctService";
 import { useEffect, useState } from "react";
 import Input from "antd/es/input/Input";
 import TextArea from "antd/es/input/TextArea";
+import Checkbox from "antd/es/checkbox/Checkbox";
 /* eslint-disable */
 interface Props{
     mode: Mode;
@@ -30,10 +31,12 @@ export const CreateUpdateConstact = ({
 }:Props)=>{
     const [name,setName] = useState<string>("");
     const [number,setNumber] = useState<string>("");
+    const [isGlobal,setIsGlobal] = useState<boolean>(false);
     const [description,setDescription] = useState<string>("");
-    const [processing,setProcessing] = useState<Boolean>(false);
+    const [processing,setProcessing] = useState<boolean>(false);
 
     useEffect(()=>{
+        setIsGlobal(values.isGlobal);
         setName(values.name);
         setNumber(values.number);
         setDescription(values.description);
@@ -53,7 +56,7 @@ export const CreateUpdateConstact = ({
             setProcessing(false);
             return;
         } 
-        const contactRequest  = {name,number,description};
+        const contactRequest  = {isGlobal,name,number,description};
         (mode == Mode.Create ? handleCreate(contactRequest) : handleUpdate(values.id,contactRequest));
         setProcessing(false);
     }
@@ -87,12 +90,14 @@ export const CreateUpdateConstact = ({
                     placeholder="Номер"
                 />
                 <p className="set_error" id="number">Поле "Номер" не может быть пустым.</p>
+                
                 <TextArea
                     value={description}
                     onChange={(e)=>setDescription(e.target.value)}
                     autoSize={{minRows:3, maxRows:3}}
                     placeholder="Описание"
                 />
+                <Checkbox onChange={(e)=>setIsGlobal(e.target.checked)} checked={isGlobal}>Публичный контакт</Checkbox>
             </div>
         </Modal>
     )
