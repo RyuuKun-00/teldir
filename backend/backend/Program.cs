@@ -26,6 +26,9 @@ namespace backend
             app.UseCors("CustomCors");
             app.UseAuthentication();
             app.UseAuthorization();
+
+           // app.UseCookiePolicy();
+
             app.MapControllers();
 
             app.Run();
