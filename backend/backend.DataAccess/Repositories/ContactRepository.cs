@@ -8,7 +8,7 @@ namespace backend.DataAccess.Repositories
     public class ContactRepository : IContactRepository
     {
         private readonly ContactStoreDBContext _context;
-        const int limitPage = 9;
+        const int limitPage = 40;
 
         public ContactRepository(ContactStoreDBContext context)
         {
@@ -19,7 +19,7 @@ namespace backend.DataAccess.Repositories
         {
             List<ContactEntity> contactsEntity;
 
-            var count = await GetCountContacts();
+            var count = await GetCountContacts(userId);
 
             if(count <= (page - 1) * limitPage)
             {
@@ -64,7 +64,7 @@ namespace backend.DataAccess.Repositories
         {
             string str = searchString.ToLower();
 
-            var count = await GetCountContacts();
+            var count = await GetCountContacts(userId, searchString);
 
             List<ContactEntity> contactsEntity;
 
@@ -147,9 +147,32 @@ namespace backend.DataAccess.Repositories
             return (count > 0) ? id : null;
         }
 
-        private async Task<int> GetCountContacts()
+        private async Task<int> GetCountContacts(Guid? userId,string? search = null)
         {
-            return await _context.Contacts.CountAsync();
+            int count;
+            if(userId is null)
+            {
+                if(String.IsNullOrEmpty(search))
+                {
+                    count = await _context.Contacts.CountAsync(x=>x.IsGlobal);
+                }
+                else
+                {
+                    count = await _context.Contacts.CountAsync(x =>x.IsGlobal && (EF.Functions.Like(x.Name.ToLower(), $"%{search}%") || EF.Functions.Like(x.Number.ToLower(), $"%{search}%")));
+                }
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(search))
+                {
+                    count = await _context.Contacts.CountAsync(x => x.UserEntityId == userId || x.IsGlobal);
+                }
+                else
+                {
+                    count = await _context.Contacts.CountAsync(x => (x.UserEntityId == userId || x.IsGlobal) && (EF.Functions.Like(x.Name.ToLower(), $"%{search}%") || EF.Functions.Like(x.Number.ToLower(), $"%{search}%")));
+                }
+            }
+            return count;
         }
     }
 }

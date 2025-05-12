@@ -30,11 +30,13 @@ export const Contacts = ({contacts,handleDelete,handleUpdate}:Props) =>{
                         }}
                     >
                         <Card 
+                        extra={contact.isGlobal && <div className="card_public">Public</div>}
                             key={contact.id} 
                             title = {<ContactTitle name={contact.name} number={contact.number}/>}
                             variant={"outlined"}
                             style={{
-                                marginBottom: "15px"
+                                marginBottom: "15px",
+                                minWidth:"200px"
                             }}
                             actions={[
                                 
@@ -57,23 +59,27 @@ export const Contacts = ({contacts,handleDelete,handleUpdate}:Props) =>{
                                     expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
                                 />
                             }
-                            <div className="card__buttons">
-                                <Button onClick={()=>handleUpdate(contact)}
-                                    style={{flex:1, padding: "10px 30px 10px 35px"}}
-                                    icon ={<FormOutlined style={{ fontSize: 20}}/>}
-                                    type="link"
-                                    size="large"
-                                    >
-                                </Button>
-                                <Button onClick={()=>handleDelete(contact.id)}
-                                    danger
-                                    style={{flex:1,padding: "10px 30px 10px 30px"}}
-                                    icon ={<DeleteOutlined style={{fontSize: 20}}/>}
-                                    type="link"
-                                    size="large"
-                                    >
-                                </Button>
-                            </div>
+                            
+                            {contact.userId != null &&
+                                <div className="card__buttons">
+                                    <Button onClick={()=>handleUpdate(contact)}
+                                        style={{flex:1, padding: "10px 30px 10px 35px"}}
+                                        icon ={<FormOutlined style={{ fontSize: 20}}/>}
+                                        type="link"
+                                        size="large"
+                                        >
+                                    </Button>
+                                    <Button onClick={()=>handleDelete(contact.id)}
+                                        danger
+                                        style={{flex:1,padding: "10px 30px 10px 30px"}}
+                                        icon ={<DeleteOutlined style={{fontSize: 20}}/>}
+                                        type="link"
+                                        size="large"
+                                        >
+                                    </Button>
+                                </div>
+                            }
+
                         </Card>
                     </ConfigProvider>
                 )

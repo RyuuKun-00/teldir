@@ -61,7 +61,7 @@ namespace backend.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Guid>> ContactUpdate(Guid id, [FromBody] ContactRequest request)
+        public async Task<ActionResult<Guid>> ContactUpdate([FromQuery] Guid id, [FromBody] ContactRequest request)
         {
             var contactId = await _contactService.ContactUpdate(id, (Guid)GetUserId()!,request.IsGlobal, request.Name, request.Number, request.Description!);
 
@@ -70,7 +70,7 @@ namespace backend.Controllers
 
         [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Guid>> ContactDelete(Guid id)
+        public async Task<ActionResult<Guid>> ContactDelete([FromQuery] Guid id)
         {
             var contactId = await _contactService.ContactDelete((Guid)GetUserId()!, id);
 

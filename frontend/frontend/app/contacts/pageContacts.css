@@ -3,6 +3,7 @@
     font-weight: bolder;
 }
 
+
 .load{
     text-align: center;
 }
@@ -13,4 +14,9 @@
 .set_error{
     color: rgb(255, 0, 0);
     display: none;
+}
+.card_public{
+    background-color: rgb(21, 255, 21);
+    padding:  5px 10px 5px 10px;
+    border-radius: 20px;
 }

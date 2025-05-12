@@ -18,6 +18,7 @@
                 {
                     builder.WithHeaders().AllowAnyHeader();
                     builder.WithMethods().AllowAnyMethod();
+                    builder.AllowCredentials();
                     builder.WithOrigins(withOrigins);
                 });
             });

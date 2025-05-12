@@ -33,11 +33,6 @@ namespace backend.Controllers
                 var userAgentData = Request.Headers["User-Agent"];
 
                 var userData = await _authService.Registration(authDto, userAgentData);
-                _logger.LogInformation($"Email: {userData.User.Email}\n" +
-                    $"Access: {userData.TokensData.AccessJwt}\n" +
-                    $"Refresh: {userData.TokensData.RefreshJwt}\n" +
-                    $"Expired: {userData.TokensData.Expired}\n" +
-                    $"LifeTime: {userData.TokensData.LifeTime}");
 
                 AddRefreshTokenCookie(userData);
 
@@ -62,12 +57,6 @@ namespace backend.Controllers
                 var userAgentData = Request.Headers["User-Agent"];
 
                 var userData = await _authService.Login(authDto, userAgentData);
-
-                _logger.LogInformation($"Email: {userData.User.Email}\n" +
-                    $"Access: {userData.TokensData.AccessJwt}\n" +
-                    $"Refresh: {userData.TokensData.RefreshJwt}\n" +
-                    $"Expired: {userData.TokensData.Expired}\n" +
-                    $"LifeTime: {userData.TokensData.LifeTime}");
 
                 AddRefreshTokenCookie(userData);
 
@@ -126,12 +115,6 @@ namespace backend.Controllers
                 var tokens = new TokensData() { AccessJwt = accessToken, RefreshJwt = refreshToken! };
 
                 var userData = await _authService.Refresh(tokens, userAgentData);
-
-                _logger.LogInformation($"Email: {userData.User.Email}\n" +
-                    $"Access: {userData.TokensData.AccessJwt}\n" +
-                    $"Refresh: {userData.TokensData.RefreshJwt}\n" +
-                    $"Expired: {userData.TokensData.Expired}\n" +
-                    $"LifeTime: {userData.TokensData.LifeTime}");
 
                 AddRefreshTokenCookie(userData);
 
