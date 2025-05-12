@@ -11,7 +11,7 @@ namespace backend.Migrations
 {
     public class ConsoleStartup
     {
-        const string nameConnection = "Test";
+        const string nameConnection = "DefaultConnection";
         public ConsoleStartup()
         {
             var builder = new ConfigurationBuilder()
